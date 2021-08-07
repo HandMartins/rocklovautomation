@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1 (Python 3.8.1 on win32)" generated="20210807 11:32:01.859" rpa="false" schemaversion="2">
+<suite id="s1" name="SignupTests" source="C:\git\qa-ninja\ROBOTXPERT\backend\tests\SignupTests.robot">
+<test id="s1-t1" name="Add New User">
+<kw name="Get Json" library="Helpers">
+<var>${payload}</var>
+<arg>signup</arg>
+<arg>new_user.json</arg>
+<kw name="Get File" library="OperatingSystem">
+<var>${fixture}</var>
+<arg>C:/git/qa-ninja/ROBOTXPERT/backend/resources/fixtures/${route}/${file_name}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<msg timestamp="20210807 11:32:02.469" level="INFO" html="true">Getting file '&lt;a href="file://C:\git\qa-ninja\ROBOTXPERT\backend\resources\fixtures\signup\new_user.json"&gt;C:\git\qa-ninja\ROBOTXPERT\backend\resources\fixtures\signup\new_user.json&lt;/a&gt;'.</msg>
+<msg timestamp="20210807 11:32:02.484" level="INFO">${fixture} = {
+    "name": "Tony Stark",
+    "email": "tony@stark.com.br",
+    "password": "pwd123"
+}
+ </msg>
+<status status="PASS" starttime="20210807 11:32:02.469" endtime="20210807 11:32:02.484"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${json}</var>
+<arg>json.loads($fixture)</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20210807 11:32:02.484" level="INFO">${json} = {'name': 'Tony Stark', 'email': 'tony@stark.com.br', 'password': 'pwd123'}</msg>
+<status status="PASS" starttime="20210807 11:32:02.484" endtime="20210807 11:32:02.484"/>
+</kw>
+<msg timestamp="20210807 11:32:02.484" level="INFO">${payload} = {'name': 'Tony Stark', 'email': 'tony@stark.com.br', 'password': 'pwd123'}</msg>
+<status status="PASS" starttime="20210807 11:32:02.469" endtime="20210807 11:32:02.484"/>
+</kw>
+<kw name="Remove User By Email">
+<arg>${payload['email']}</arg>
+<msg timestamp="20210807 11:32:02.484" level="FAIL">No keyword with name 'Remove User By Email' found.</msg>
+<status status="FAIL" starttime="20210807 11:32:02.484" endtime="20210807 11:32:02.484"/>
+</kw>
+<kw name="POST USER" library="Signup">
+<var>${response}</var>
+<arg>${payload}</arg>
+<status status="NOT RUN" starttime="20210807 11:32:02.484" endtime="20210807 11:32:02.484"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" starttime="20210807 11:32:02.484" endtime="20210807 11:32:02.484"/>
+</kw>
+<status status="FAIL" starttime="20210807 11:32:02.469" endtime="20210807 11:32:02.484">No keyword with name 'Remove User By Email' found.</status>
+</test>
+<doc>Testes na rota Signup</doc>
+<status status="FAIL" starttime="20210807 11:32:01.859" endtime="20210807 11:32:02.484"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="SignupTests">SignupTests</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20210807 11:32:02.015" level="ERROR">Error in file 'C:\git\qa-ninja\ROBOTXPERT\backend\resources\Base.robot' on line 8: Resource file 'c:gitqa-ninjaROBOTXPERTbackendesourceslibsmongo.py' does not exist.</msg>
+</errors>
+</robot>
