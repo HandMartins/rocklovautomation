@@ -2,6 +2,7 @@
 Documentation     Testes na rota Signup
 Resource          ../resources/Base.robot            #${EXECDIR} busca o caminho absoluto
 
+
 Library           RequestsLibrary
 Library           FakerLibrary
 
@@ -10,7 +11,7 @@ Library           FakerLibrary
 *** Test Cases ***
 Add New User
     ${payload}               Get Json         signup        new_user.json
-    Remove User By Email     ${payload['email']}  
+    Remove User By Email     ${payload['email']}
     
 
     # ${email}      FakerLibrary.Free Email

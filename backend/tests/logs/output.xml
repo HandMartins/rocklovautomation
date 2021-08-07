@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 4.1 (Python 3.8.1 on win32)" generated="20210807 11:32:01.859" rpa="false" schemaversion="2">
+<robot generator="Robot 4.1 (Python 3.8.1 on win32)" generated="20210807 12:09:38.133" rpa="false" schemaversion="2">
 <suite id="s1" name="SignupTests" source="C:\git\qa-ninja\ROBOTXPERT\backend\tests\SignupTests.robot">
 <test id="s1-t1" name="Add New User">
 <kw name="Get Json" library="Helpers">
@@ -10,58 +10,76 @@
 <var>${fixture}</var>
 <arg>C:/git/qa-ninja/ROBOTXPERT/backend/resources/fixtures/${route}/${file_name}</arg>
 <doc>Returns the contents of a specified file.</doc>
-<msg timestamp="20210807 11:32:02.469" level="INFO" html="true">Getting file '&lt;a href="file://C:\git\qa-ninja\ROBOTXPERT\backend\resources\fixtures\signup\new_user.json"&gt;C:\git\qa-ninja\ROBOTXPERT\backend\resources\fixtures\signup\new_user.json&lt;/a&gt;'.</msg>
-<msg timestamp="20210807 11:32:02.484" level="INFO">${fixture} = {
+<msg timestamp="20210807 12:09:39.277" level="INFO" html="true">Getting file '&lt;a href="file://C:\git\qa-ninja\ROBOTXPERT\backend\resources\fixtures\signup\new_user.json"&gt;C:\git\qa-ninja\ROBOTXPERT\backend\resources\fixtures\signup\new_user.json&lt;/a&gt;'.</msg>
+<msg timestamp="20210807 12:09:39.278" level="INFO">${fixture} = {
     "name": "Tony Stark",
     "email": "tony@stark.com.br",
     "password": "pwd123"
 }
  </msg>
-<status status="PASS" starttime="20210807 11:32:02.469" endtime="20210807 11:32:02.484"/>
+<status status="PASS" starttime="20210807 12:09:39.276" endtime="20210807 12:09:39.278"/>
 </kw>
 <kw name="Evaluate" library="BuiltIn">
 <var>${json}</var>
 <arg>json.loads($fixture)</arg>
 <arg>json</arg>
 <doc>Evaluates the given expression in Python and returns the result.</doc>
-<msg timestamp="20210807 11:32:02.484" level="INFO">${json} = {'name': 'Tony Stark', 'email': 'tony@stark.com.br', 'password': 'pwd123'}</msg>
-<status status="PASS" starttime="20210807 11:32:02.484" endtime="20210807 11:32:02.484"/>
+<msg timestamp="20210807 12:09:39.283" level="INFO">${json} = {'name': 'Tony Stark', 'email': 'tony@stark.com.br', 'password': 'pwd123'}</msg>
+<status status="PASS" starttime="20210807 12:09:39.278" endtime="20210807 12:09:39.283"/>
 </kw>
-<msg timestamp="20210807 11:32:02.484" level="INFO">${payload} = {'name': 'Tony Stark', 'email': 'tony@stark.com.br', 'password': 'pwd123'}</msg>
-<status status="PASS" starttime="20210807 11:32:02.469" endtime="20210807 11:32:02.484"/>
+<msg timestamp="20210807 12:09:39.283" level="INFO">${payload} = {'name': 'Tony Stark', 'email': 'tony@stark.com.br', 'password': 'pwd123'}</msg>
+<status status="PASS" starttime="20210807 12:09:39.276" endtime="20210807 12:09:39.283"/>
 </kw>
-<kw name="Remove User By Email">
+<kw name="Remove User By Email" library="mongo">
 <arg>${payload['email']}</arg>
-<msg timestamp="20210807 11:32:02.484" level="FAIL">No keyword with name 'Remove User By Email' found.</msg>
-<status status="FAIL" starttime="20210807 11:32:02.484" endtime="20210807 11:32:02.484"/>
+<status status="PASS" starttime="20210807 12:09:39.284" endtime="20210807 12:09:39.486"/>
 </kw>
 <kw name="POST USER" library="Signup">
 <var>${response}</var>
 <arg>${payload}</arg>
-<status status="NOT RUN" starttime="20210807 11:32:02.484" endtime="20210807 11:32:02.484"/>
+<kw name="POST" library="RequestsLibrary">
+<var>${response}</var>
+<arg>${base_url}/signup</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request.</doc>
+<msg timestamp="20210807 12:09:40.530" level="INFO">POST Request : url=https://rocklov-hand-api.herokuapp.com/signup 
+ path_url=/signup 
+ headers={'User-Agent': 'python-requests/2.26.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '74', 'Content-Type': 'application/json'} 
+ body=b'{"name": "Tony Stark", "email": "tony@stark.com.br", "password": "pwd123"}' 
+ </msg>
+<msg timestamp="20210807 12:09:40.530" level="INFO">POST Response : url=https://rocklov-hand-api.herokuapp.com/signup 
+ status=200, reason=OK 
+ headers={'Server': 'Cowboy', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '136', 'Etag': 'W/"88-2UPlDHSLZZGIfyNcZ5OKiyP0SIo"', 'Date': 'Sat, 07 Aug 2021 15:09:39 GMT', 'Via': '1.1 vegur'} 
+ body={"_id":"610ea233ace8540015e41016","name":"Tony Stark","email":"tony@stark.com.br","password":"45cb41b32dcfb917ccd8614f1536d6da","__v":0} 
+ </msg>
+<msg timestamp="20210807 12:09:40.530" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210807 12:09:39.488" endtime="20210807 12:09:40.531"/>
+</kw>
+<msg timestamp="20210807 12:09:40.531" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210807 12:09:39.487" endtime="20210807 12:09:40.531"/>
 </kw>
 <kw name="Status Should Be" library="RequestsLibrary">
 <arg>200</arg>
 <arg>${response}</arg>
 <doc>Fails if response status code is different than the expected.</doc>
-<status status="NOT RUN" starttime="20210807 11:32:02.484" endtime="20210807 11:32:02.484"/>
+<status status="PASS" starttime="20210807 12:09:40.532" endtime="20210807 12:09:40.533"/>
 </kw>
-<status status="FAIL" starttime="20210807 11:32:02.469" endtime="20210807 11:32:02.484">No keyword with name 'Remove User By Email' found.</status>
+<status status="PASS" starttime="20210807 12:09:39.275" endtime="20210807 12:09:40.534"/>
 </test>
 <doc>Testes na rota Signup</doc>
-<status status="FAIL" starttime="20210807 11:32:01.859" endtime="20210807 11:32:02.484"/>
+<status status="PASS" starttime="20210807 12:09:38.135" endtime="20210807 12:09:40.538"/>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="1" skip="0">All Tests</stat>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="0" fail="1" skip="0" id="s1" name="SignupTests">SignupTests</stat>
+<stat pass="1" fail="0" skip="0" id="s1" name="SignupTests">SignupTests</stat>
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20210807 11:32:02.015" level="ERROR">Error in file 'C:\git\qa-ninja\ROBOTXPERT\backend\resources\Base.robot' on line 8: Resource file 'c:gitqa-ninjaROBOTXPERTbackendesourceslibsmongo.py' does not exist.</msg>
 </errors>
 </robot>
