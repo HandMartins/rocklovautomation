@@ -6,6 +6,7 @@ Library          ../resources/libs/mongo.py
 Resource        Helpers.robot
 Resource        ../resources/routes/Sessions.robot
 Resource        ../resources/routes/Signup.robot
+Resource        ../resources/routes/Equipos.robot
 
 
 
