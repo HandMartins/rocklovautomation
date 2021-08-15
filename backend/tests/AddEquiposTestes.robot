@@ -1,18 +1,17 @@
 *** Settings ***
 Documentation     Testes de Tentativas de Login
-Resource          ../resources/Base.robot            #${EXECDIR} busca o caminho absoluto
-Library           RequestsLibrary
+Resource          ../resources/Base.robot    #${EXECDIR} busca o caminho absoluto
 
 
 
 *** Test Cases ***
-Add New Equipo   
-    
-    ${token}           Get Token            xxx@gmail.com    123321
+Add New Equipo
+    ${token}        Get Token        handmartins@gmail.com        123321
+    ${equipo}      Get Json         equipos                      fender.json
 
-    ${payload}          Get Json          equipos     fender.json
+    Remove Equipo    ${equipo}[payload][name]
 
-    ${response}         POST EQUIPOS      ${payload}   ${token}    guitarra-strato.png 
-
+    ${response}     POST EQUIPO     ${equipo}    ${token}       
+    Status Should Be    200    ${response}
 
     

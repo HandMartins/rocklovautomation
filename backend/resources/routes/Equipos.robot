@@ -4,19 +4,19 @@ Library          RequestsLibrary
 Library          OperatingSystem
 
 *** Keywords ***
-POST EQUIPOS
-    [Arguments]        ${payload}    ${token}    ${image_file}
+POST EQUIPO
+    [Arguments]        ${equipo}    ${token}    
     
     &{headers}         Create Dictionary    user_token=${token}
 
-    ${bin_image}       Get Binary File    C:/git/qa-ninja/ROBOTXPERT/backend/resources/fixtures/equipos/fotos/${image_file}
-    &{thumbnaill}      Create Dictionary    thumbnaill=${bin_image}
+    ${bin_image}       Get Binary File      C:/git/qa-ninja/ROBOTXPERT/backend/resources/fixtures/equipos/thumbnail/${equipo}[thumb]
+    &{thumbnail}      Create Dictionary    thumbnail=${bin_image}
 
     ${response}        POST          
-    ...                ${base_url}/equipos    
-    ...                data=${payload}
+    ...                ${base_url}/equipos
+    ...                data=${equipo}[payload]
     ...                headers=${headers}
-    ...                files=${thumbnaill}
+    ...                files=${thumbnail}
     ...                expected_status=any
 
     [Return]           ${response}
