@@ -20,3 +20,15 @@ POST EQUIPO
     ...                expected_status=any
 
     [Return]           ${response}
+
+GET UNIQUE EQUIPO
+    [Arguments]    ${token}    ${equipo_id}
+
+    &{headers}    Create Dictionary    user_token=${token}
+
+    ${response}    Get
+    ...            ${base_url}/equipos/${equipo_id}
+    ...            headers=${headers}
+    ...            expected_status=any
+
+    [Return]       ${response}
